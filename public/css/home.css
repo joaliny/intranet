@@ -1,0 +1,14 @@
+.carousel-item img {
+    transition: transform 0.5s ease-in-out;
+    height: 50px;
+    object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorção */
+  } 
+   
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+
+  .custom-height {
+    height: 100px;
+    object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorção */
+}

@@ -1,0 +1,18 @@
+
+    .custom-table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .custom-table th {
+        background-color: #296199;
+        color: #fff;
+    }
+    .custom-table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    .custom-table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+
