@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('colaboradores', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->string('setor');
             $table->string('telefone');
             $table->string('email')->unique();
+            $table->string('cpf')->unique(); // Adiciona a coluna CPF com unicidade
             $table->string('foto')->nullable();
             $table->timestamps();
         });

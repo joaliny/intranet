@@ -34,3 +34,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/colaboradores', [ColaboradorController::class, 'store'])->name('admin.colaboradores.store');
 });
 
+Route::get('/admin/colaboradores/verificar-cpf', [ColaboradorController::class, 'verificarCpf'])->name('admin.colaboradores.verificarCpf');
+Route::post('/admin/colaboradores/verificar-cpf', [ColaboradorController::class, 'processarVerificacaoCpf'])->name('admin.colaboradores.processarVerificacaoCpf');
+

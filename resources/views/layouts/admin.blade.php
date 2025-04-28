@@ -31,12 +31,16 @@
 </head>
 <body>
     <div class="sidebar">
-        <h2>Administração</h2>
+        <h2>FAPEAM</h2>
         <ul>
-            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ route('admin.colaboradores.index') }}">Colaboradores</a></li>
-            <li><a href="#">Carrossel</a></li>
-            <li><a href="#">Configurações</a></li>
+            <li><a href="{{ route('admin.dashboard') }}">home</a></li>
+            <li><a href="{{ route('admin.colaboradores.index') }}">Usuários</a></li>
+            <li><a href="#">Slides Bannes</a></li>
+            <li><a href="#">Enquetes</a></li>
+            <li><a href="#">Posts mural</a></li>
+            <li><a href="#">Departamento</a></li>
+            <li><a href="#">Ramais telefônicos</a></li>
+            <li><a href="#">Bem Vindos</a></li>
         </ul>
     </div>
     <div class="content">

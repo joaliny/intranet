@@ -16,6 +16,7 @@ class Colaborador extends Model
         'setor',
         'telefone',
         'email',
+        'cpf',
         'foto',
     ];
 }
