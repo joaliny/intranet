@@ -213,14 +213,15 @@
                         </li>
                     </ul>
              
-           <ul class="navbar-nav">
-             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/ramais" target="_blank" id="navbarDarkDropdownMenuLink4"
-                    role="button" aria-expanded="false">
-                    Administrador
-                </a>
-            </li>
-        </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/admin" target="_blank" id="navbarDarkDropdownMenuLink4"
+                                role="button" aria-expanded="false">
+                                Administrador
+                            </a>
+                        </li>
+                    </ul>
+                    
         </div>
         </div>
         </nav>
@@ -346,14 +347,15 @@
 </div>
 
 
-        <!-- Marketing messaging and featurettes
+        <!-- Mensagens de bem vidos  
   ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->
-
+        
         <div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
+       
+         <!-- Três colunas de texto abaixo do carrossel -->
             <div class="row">
+                <h2 style="text-align: center;">Seja Bem Vindo</h2>
+
                 <div class="col-lg-4">
                     <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
