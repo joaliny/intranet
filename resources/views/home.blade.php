@@ -325,7 +325,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/1.jpg') }}" class="d-block w-100" alt="Terceira imagem" style="width: 100%; height: 400px;">
+            <img src="{{ asset('img/1.jpg') }}" class="d-block w-100" alt="Terceira imagem" >
             <div class="container">
                 <!-- <div class="carousel-caption text-end">
                     <h1>One more for good measure.</h1>
