@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('setor');
             $table->string('telefone');
             $table->string('email')->unique();
-            $table->string('cpf')->unique(); // Adiciona a coluna CPF com unicidade
             $table->string('foto')->nullable();
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colaboradors');
+        Schema::dropIfExists('colaboradores');
     }
 };

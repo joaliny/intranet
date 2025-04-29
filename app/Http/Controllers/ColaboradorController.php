@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Colaborador;
 use Illuminate\Http\Request;
@@ -19,32 +19,6 @@ class ColaboradorController extends Controller
     {
         return view('admin.colaboradores.create');
     }
-
-    /**
-     * Armazena o novo colaborador
-     */
-    // public function store(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'nome' => 'required|string|max:255',
-    //         'setor' => 'required|string|max:255',
-    //         'telefone' => 'required|string|max:15',
-    //         'email' => 'required|email|max:255',
-    //         'cpf' => 'required|string|size:14|unique:colaboradores,cpf', // Verifica se o CPF é único
-    //         'foto' => 'nullable|image|max:2048',
-    //     ]);
-
-    //     // Upload da foto (se existir)
-    //     if ($request->hasFile('foto')) {
-    //         $path = $request->file('foto')->store('colaboradores', 'public');
-    //         $validated['foto'] = $path;
-    //     }
-
-    //     Colaborador::create($validated);
-
-    //     return redirect()->route('admin.colaboradores.index')
-    //         ->with('success', 'Colaborador adicionado com sucesso!');
-    // }
 
 
     public function store(Request $request)
@@ -76,24 +50,24 @@ class ColaboradorController extends Controller
     return redirect()->route('admin.colaboradores.index')->with('success', 'Colaborador cadastrado com sucesso!');
   }
 
-public function verificarCpf()
-{
-    return view('admin.colaboradores.verificar-cpf');
-}
 
-public function processarVerificacaoCpf(Request $request)
-{
-    $request->validate([
-        'cpf' => 'required|string|size:14', // Valida o formato do CPF
-    ]);
 
-    $colaborador = Colaborador::where('cpf', $request->cpf)->first();
-
-    if ($colaborador) {
-        return redirect()->route('admin.colaboradores.verificarCpf')->with('success', 'O CPF já está cadastrado para o colaborador: ' . $colaborador->nome);
-    } else {
-        return redirect()->route('admin.colaboradores.verificarCpf')->with('error', 'O CPF não está cadastrado. Você pode prosseguir com o cadastro.');
-    }
-}
+  public function processarVerificacaoCpf(Request $request)
+  {
+      // Remove todos os caracteres não numéricos
+      $cpfLimpo = preg_replace('/[^0-9]/', '', $request->input('cpf'));
+  
+      // Reaplica o formato para comparar corretamente com o banco
+      $cpfFormatado = substr($cpfLimpo, 0, 3) . '.' . substr($cpfLimpo, 3, 3) . '.' . substr($cpfLimpo, 6, 3) . '-' . substr($cpfLimpo, 9, 2);
+  
+      $colaborador = Colaborador::where('cpf', $cpfFormatado)->first();
+  
+      if ($colaborador) {
+          return response()->json(['error' => 'Este CPF já está cadastrado.']);
+      }
+  
+      return response()->json(['success' => 'CPF disponível para cadastro.']);
+  }
+ 
 
 }

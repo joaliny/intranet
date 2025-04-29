@@ -1,4 +1,4 @@
-
+<!-- 
 
 @section('title', 'Adicionar Colaborador')
 
@@ -75,7 +75,7 @@
 </div>
 
 <!-- Adicione isso no seu layout principal ou aqui no final -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
 :root {
     --primary-color: #3498db;
@@ -262,10 +262,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-}
+} -->
 
-/* Adicione este script para visualização da imagem selecionada */
-<script>
+<!-- /* Adicione este script para visualização da imagem selecionada */ -->
+<!-- <script>
 document.getElementById('foto').addEventListener('change', function(e) {
     const previewContainer = document.getElementById('previewContainer');
     previewContainer.innerHTML = '';
@@ -285,4 +285,88 @@ document.getElementById('foto').addEventListener('change', function(e) {
     }
 });
 </script>
-</style>
+</style> --> 
+
+@extends('layouts.app')
+
+@section('title', 'Verificar CPF')
+
+@section('content')
+<div class="container-form">
+    <div class="form-header">
+        <h1><i class="fas fa-id-card"></i> Verificar CPF</h1>
+        <p>Antes de adicionar um novo colaborador, verifique se o CPF já está cadastrado.</p>
+    </div>
+
+    <div class="form-group">
+        <label for="cpf" class="form-label">
+            <i class="fas fa-id-card"></i> CPF
+        </label>
+        <input type="text" name="cpf" id="cpf" class="form-input" required placeholder="Digite o CPF (000.000.000-00)">
+        <button type="button" id="verificarCpfBtn" class="btn-submit">Verificar</button>
+        <div id="cpfFeedback" style="margin-top:10px;"></div>
+    </div>
+
+    {{-- Formulário de cadastro, inicialmente escondido --}}
+    <div id="formCadastroColaborador" style="display:none; margin-top: 30px;">
+        <h2><i class="fas fa-user-plus"></i> Adicionar Novo Colaborador</h2>
+        <form action="{{ route('admin.colaboradores.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="cpf" id="cpfHidden">
+
+            <div class="form-group">
+                <label for="nome" class="form-label">
+                    <i class="fas fa-user"></i> Nome Completo
+                </label>
+                <input type="text" name="nome" id="nome" class="form-input" required placeholder="Digite o nome completo">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-save"></i> Salvar Colaborador
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+@section('scripts')
+<script>
+document.getElementById('verificarCpfBtn').addEventListener('click', function () {
+    const cpf = document.getElementById('cpf').value;
+    const feedback = document.getElementById('cpfFeedback');
+    const form = document.getElementById('formCadastroColaborador');
+    const cpfHidden = document.getElementById('cpfHidden');
+
+    fetch('{{ route('admin.colaboradores.processarVerificacaoCpf') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ cpf: cpf })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Ver no console
+
+        if (data.success) {
+            feedback.innerHTML = `<span style="color:green">${data.success}</span>`;
+            cpfHidden.value = cpf;
+            form.style.display = 'block';
+        } else if (data.error) {
+            feedback.innerHTML = `<span style="color:red">${data.error}</span>`;
+            form.style.display = 'none';
+        }
+    })
+    .catch(error => {
+        console.error('Erro na verificação:', error);
+        feedback.innerHTML = `<span style="color:red">Erro na comunicação com o servidor.</span>`;
+        form.style.display = 'none';
+    });
+});
+</script>
+@endsection
+
